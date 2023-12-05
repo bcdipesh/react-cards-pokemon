@@ -12,12 +12,12 @@ function useFlip(initialState = true) {
   return [isFlipped, flip];
 }
 
-function useAxios(url) {
+function useAxios(baseUrl) {
   const [data, setData] = useState([]);
 
-  async function fetchData() {
+  async function fetchData(additionalUrl = "") {
     try {
-      const response = await axios.get(url);
+      const response = await axios.get(`${baseUrl}${additionalUrl}`);
       setData(function (prevData) {
         return [...prevData, { ...response.data, id: uuid() }];
       });
